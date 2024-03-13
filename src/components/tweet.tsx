@@ -169,7 +169,7 @@ function Tweet({ tweet, username, photo, userId, id }: ITweet) {
       console.log(e)
     }
   };
-
+  // 이미지만 자동으로 업데이트가 안되는 이유는?
   useEffect(() => {
     setUpdateFile(null);
   }, [photo])
