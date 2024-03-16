@@ -119,7 +119,7 @@ function Tweet({ tweet, username, photo, userId, id }: ITweet) {
   const [edit, setEdit] = useState(false);
   const [updateTweet, setUpdateTweet] = useState(tweet);
   const [updateFile, setUpdateFile] = useState<File | null>(null);
-  const photoRef = ref(storage, `tweets/${user.uid}/${id}`);
+  const photoRef = ref(storage, `tweets/${user?.uid}/${id}`);
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setUpdateTweet(e.target.value);
@@ -154,6 +154,7 @@ function Tweet({ tweet, username, photo, userId, id }: ITweet) {
   };
   const onEditSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    if (user?.uid !== userId) return;
     try {
       await updateDoc(doc(db, "tweets", id), { tweet: updateTweet })
       if (updateFile) {
